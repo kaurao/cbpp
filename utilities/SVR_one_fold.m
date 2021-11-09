@@ -36,6 +36,10 @@ end
 % training
 x_train = x(cv_ind ~= fold, :);
 y_train = y(cv_ind ~= fold);
+% the following line fits SVR with default parameters
+% however, to be comparable and fair like other methods it will be good to tune SVR
+% the two common parameters to tune here would be the BoxCOnstraint (C) and the Epsilon 
+% see details here: https://de.mathworks.com/help/stats/fitrsvm.html#namevaluepairarguments
 model = fitrlinear(x_train, y_train); % fitrlinear uses SVR by default
 
 % get model
