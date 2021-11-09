@@ -95,6 +95,10 @@ end
 alpha = alpha_best;
 
 % get training performance
+% here the `weights` and `b` are coming from the training set without validation set
+% this set is smaller and defined as x/y_train_inner for other methods, e.g. https://github.com/kaurao/cbpp/blob/master/utilities/RR_one_fold.m
+% which may cause suboptimal models due to fewer data points and unfair comparison with other models using larger sets
+% train using x/y_train as dfefined for other models using the `alpha_best` found above
 ypred_train = x_train * weights + b;
 perf.r_train = corr(y_train, ypred_train, 'type', 'Pearson', 'Rows', 'complete');
 perf.nrmsd_train = sqrt(sum((y_train - ypred_train).^2) / (length(y_train) - 1)) / std(y_train);
